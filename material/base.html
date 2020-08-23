@@ -41,9 +41,9 @@
       {% endif %}
     {% endblock %}
     {% block styles %}
-      <link rel="stylesheet" href="{{ 'assets/stylesheets/main.78c1d7f2.min.css' | url }}">
+      <link rel="stylesheet" href="{{ 'assets/stylesheets/main.c656a407.min.css' | url }}">
       {% if palette.scheme or palette.primary or palette.accent %}
-        <link rel="stylesheet" href="{{ 'assets/stylesheets/palette.2c2767bb.min.css' | url }}">
+        <link rel="stylesheet" href="{{ 'assets/stylesheets/palette.08131a41.min.css' | url }}">
       {% endif %}
       {% if palette.primary %}
         {% import "partials/palette.html" as map %}
@@ -53,6 +53,7 @@
         <meta name="theme-color" content="{{ primary }}">
       {% endif %}
     {% endblock %}
+    <script>window.base_url=window.base_url||"{{ base_url }}"</script>
     {% block libs %}{% endblock %}
     {% block fonts %}
       {% if font != false %}
@@ -123,6 +124,24 @@
           {% include "partials/tabs.html" %}
         {% endif %}
       {% endblock %}
+      {% if page and page.meta and page.meta.full_width_content %}
+      <main class="md-main" role="main">
+        <div data-md-component="container">
+            {{ page.content }}
+        </div>
+        <div style="display:none">
+            <div class="md-typeset">
+                <h1>placeholder</h1>
+            </div>
+            <div data-md-component="navigation">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+                  <div></div>
+                  <div></div>
+                </nav>
+            </div>
+        </div>
+      </main>
+      {% else %}
       <main class="md-main" data-md-component="main">
         <div class="md-main__inner md-grid">
           {% block site_nav %}
@@ -177,6 +196,7 @@
           </div>
         </div>
       </main>
+      {% endif %}
       {% block footer %}
         {% include "partials/footer.html" %}
       {% endblock %}

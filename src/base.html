@@ -110,6 +110,9 @@
       {% endif %}
     {% endblock %}
 
+    <script>
+      window.base_url = window.base_url || '{{ base_url }}'
+    </script>
     <!-- JavaScript libraries -->
     {% block libs %}{% endblock %}
 
@@ -254,6 +257,24 @@
       {% endblock %}
 
       <!-- Main area -->
+      {% if page and page.meta and page.meta.full_width_content %}
+      <main class="md-main" role="main">
+        <div data-md-component="container">
+            {{ page.content }}
+        </div>
+        <div style="display: none;">
+            <div class="md-typeset">
+                <h1>placeholder</h1>
+            </div>
+            <div data-md-component="navigation">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+                  <div></div>
+                  <div></div>
+                </nav>
+            </div>
+        </div>
+      </main>
+      {% else %}
       <main class="md-main" data-md-component="main">
         <div class="md-main__inner md-grid">
 
@@ -344,6 +365,7 @@
           </div>
         </div>
       </main>
+      {% endif %}
 
       <!-- Application footer -->
       {% block footer %}
